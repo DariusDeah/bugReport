@@ -1,4 +1,5 @@
 import { dbContext } from '../db/DbContext'
+import { BadRequest } from '../utils/Errors'
 
 class BugsService {
   async getBugs() {
@@ -8,6 +9,10 @@ class BugsService {
 
   async getBugById(bugId) {
     const bug = await dbContext.Bugs.find(bugId)
+    if (!bug) {
+      throw new BadRequest()
+    }
+    return bug
   }
 }
 export const bugsService = new BugsService()

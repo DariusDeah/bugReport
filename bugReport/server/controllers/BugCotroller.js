@@ -20,8 +20,10 @@ export class Bugcontroller extends BaseController {
 
   async getBugById(req, res, next) {
     try {
-      const bug = await bugsService.getBugById(param.bugId)
+      const bug = await bugsService.getBugById(req.params.bugId)
+      res.send(bug)
     } catch (error) {
+      next(error)
     }
   }
 }
