@@ -6,6 +6,7 @@ export class Bugcontroller extends BaseController {
     super('api/bugs')
     this.router
       .get('', this.getBugs)
+      .get('/:bugId', this.getBugById)
   }
 
   async getBugs(req, res, next) {
@@ -14,6 +15,13 @@ export class Bugcontroller extends BaseController {
       res.send(bugs)
     } catch (error) {
       next(error)
+    }
+  }
+
+  async getBugById(req, res, next) {
+    try {
+      const bug = await bugsService.getBugById(param.bugId)
+    } catch (error) {
     }
   }
 }
