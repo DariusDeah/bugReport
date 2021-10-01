@@ -14,5 +14,11 @@ class BugsService {
     }
     return bug
   }
+
+  async createBug(bugData) {
+    const bug = await dbContext.Bugs.create(bugData)
+    await bug.populate('creator')
+    return bug
+  }
 }
 export const bugsService = new BugsService()

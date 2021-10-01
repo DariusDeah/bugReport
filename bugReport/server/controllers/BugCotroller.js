@@ -1,3 +1,4 @@
+import { Auth0Provider } from '@bcwdev/auth0provider'
 import { bugsService } from '../services/BugsService'
 import BaseController from '../utils/BaseController'
 
@@ -7,6 +8,8 @@ export class Bugcontroller extends BaseController {
     this.router
       .get('', this.getBugs)
       .get('/:bugId', this.getBugById)
+      .use(Auth0Provider.getAuthorizedUserInfo)
+      .post('', this.createBug)
   }
 
   async getBugs(req, res, next) {
@@ -22,6 +25,15 @@ export class Bugcontroller extends BaseController {
     try {
       const bug = await bugsService.getBugById(req.params.bugId)
       res.send(bug)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async createBug(req, res, next) {
+    try {
+      req.body.creatorId = req.userInfo.id
+      const bug = await bugsService.createBug(req.body)
     } catch (error) {
       next(error)
     }
