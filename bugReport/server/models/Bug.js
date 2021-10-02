@@ -1,15 +1,16 @@
 import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
-export const BugSchema = new Schema({
-  title: { type: String, required: true },
-  description: { type: String, required: true },
-  priority: { type: Number, required: true, default: 1 },
-  closed: { type: Boolean, default: false },
-  closedDate: { type: Date, default: Date.now() },
-  creatorId: { type: Schema.Types.ObjectId, required: true, ref: 'Account' }
-},
-{ timestamps: true, toJSON: { virtuals: true } }
+export const BugSchema = new Schema(
+  {
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    priority: { type: Number, required: true, default: 1 },
+    closed: { type: Boolean, default: false },
+    closedDate: { type: Date, default: Date.now() },
+    creatorId: { type: Schema.Types.ObjectId, ref: 'Account', required: true }
+  },
+  { timestamps: true, toJSON: { virtuals: true } }
 )
 // whenever this is created in the database a fake/virtual property is beign made
 // the property being made is creator
