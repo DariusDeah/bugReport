@@ -29,6 +29,9 @@ class BugsService {
     if (bug.creatorId.toString() !== bugData.creatorId.toString()) {
       throw new Forbidden()
     }
+    if (bug.closed === true) {
+      throw new BadRequest()
+    }
 
     bug.title = bugData.title || bug.title
     bug.description = bugData.description || bug.description
@@ -42,15 +45,20 @@ class BugsService {
 
   async closeBug(bugData, bugId) {
     const closedBug = await this.getBugById(bugId)
-    if (bugData.creatorId.toString() !== closedBug.creatorId.toString) {
+
+    if (closedBug.creatorId.toString() !== bugData.creatorId.toString()) {
       throw new Forbidden()
     }
-    bugData.closed = !bugData.closed
-    return bugData
-  }
+    if (closedBug.closed === true) {
+      throw new BadRequest()
+    }
 
-  // !Reminder the delete is a soft delete dont actually delete the bug
-  // async removed(bugData,) {
-  // }
+    closedBug.closed = !closedBug.closed
+
+    // this took me so many hours to realize 😠
+    await closedBug.save()
+    ///
+    return closedBug
+  }
 }
 export const bugsService = new BugsService()
