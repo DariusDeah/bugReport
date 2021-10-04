@@ -63,8 +63,18 @@
                 <button class="btn border query-btn " @click="filterLevel(3)">3</button>
                 <button class="btn border query-btn " @click="filterLevel(4)">4</button>
                 <button class="btn border query-btn " @click="filterLevel(5)">5</button>
+                <button class="btn bg-purple ms-5 text-light " data-bs-toggle="modal" data-bs-target="#bug-modal">+Bug</button>
 
               </span>
+
+              <Modal id="bug-modal">
+                <template #modal-title>
+                  <h4>Report Bug</h4>
+                </template>
+                <template #modal-body>
+                  <BugForm />
+                </template>
+              </Modal>
             </div>
             <div class="col-lg-6">
               <div class="input-group">
@@ -81,7 +91,7 @@
             </div>
           </div>
         </div>
-        <div class="card-body overflow-auto" style="height:100vh">
+        <div class="card-body overflow-auto" style="height:120vh">
           <Bugs v-for="b in bugs " :key="b.id" :bugs=" b" />
         </div>
       </div>
@@ -163,6 +173,9 @@ color:#875cff ;
 .most-tracked:hover{
     border: #875cff solid 1px;
     cursor: pointer;
+}
+.bg-purple{
+    background-color: #875cff;
 }
 
 </style>
