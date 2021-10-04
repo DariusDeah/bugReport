@@ -1,5 +1,4 @@
 import { Auth0Provider } from '@bcwdev/auth0provider'
-import { get } from 'mongoose'
 import { trackedBugsService } from '../services/TrackedBugsService'
 import BaseController from '../utils/BaseController'
 

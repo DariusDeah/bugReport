@@ -79,7 +79,6 @@ export class BugController extends BaseController {
 
   async getTrackedBugsByBugId(req, res, next) {
     try {
-      req.body.creatorId = req.userInfo.id
       const trackedBug = await trackedBugsService.trackedBugs(req.params.bugId)
       res.send(trackedBug)
     } catch (error) {

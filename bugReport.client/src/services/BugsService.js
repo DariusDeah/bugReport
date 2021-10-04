@@ -17,7 +17,7 @@ class BugsService {
 
   async getBugById(bugId) {
     const res = await api.get(`api/bugs/${bugId}`)
-    AppState.activeBug = res.data
+    AppState.activeBug = (new BugModel(res.data))
   }
 
   async closedBug(bugId, bugData) {
@@ -30,8 +30,9 @@ class BugsService {
   }
 
   async createBug(bugData) {
-    const res = api.post('api/bugs', bugData)
-    AppState.bugs.unshift(new BugModel(res.data))
+    const res = await api.post('api/bugs', bugData)
+    logger.log('harrison is sad', res)
+    AppState.bugs.push(new BugModel(res.data))
   }
 }
 export const bugsService = new BugsService()

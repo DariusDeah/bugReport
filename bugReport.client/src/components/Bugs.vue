@@ -16,7 +16,7 @@
             <button class="btn border border-success " :class="{'btn-success':bugs.closed===false}">
               open
             </button>
-            <button class="btn border border-secondary selectable  " :class="{'btn-secondary':bugs.closed===true}" @click="closeBug()">
+            <button class="btn border border-secondary selectable" :class="{'btn-secondary':bugs.closed===true}" @click="closeBug()">
               close
             </button>
             <button class="btn border border-secondary  " @click="softDelete()">

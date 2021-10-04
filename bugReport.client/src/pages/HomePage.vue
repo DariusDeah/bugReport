@@ -58,11 +58,7 @@
             <div class="col-lg-6">
               <span class="d-flex  ">
                 <h2>Level:</h2>
-                <button class="btn border query-btn " @click="filterLevel(1)">1</button>
-                <button class="btn border query-btn " @click="filterLevel(2)">2</button>
-                <button class="btn border query-btn " @click="filterLevel(3)">3</button>
-                <button class="btn border query-btn " @click="filterLevel(4)">4</button>
-                <button class="btn border query-btn " @click="filterLevel(5)">5</button>
+                <button class="mdi mdi-pizza " @click="sorting=!sorting">1</button>
                 <button class="btn bg-purple ms-5 text-light " data-bs-toggle="modal" data-bs-target="#bug-modal">+Bug</button>
 
               </span>
@@ -112,20 +108,27 @@
 </template>
 
 <script>
-import { computed, onMounted } from '@vue/runtime-core'
+import { computed, onMounted, ref } from '@vue/runtime-core'
 import { bugsService } from '../services/BugsService'
 import { AppState } from '../AppState'
 export default {
   name: 'Home',
   setup() {
+    const sorting = ref(false)
     onMounted(async() => {
       await bugsService.getBugs()
     })
-    return {
-      bugs: computed(() => AppState.bugs),
-      async filterLevel(query) {
-        await bugsService.priorityFilter(query)
+
+    function sortByPriority(a, b) {
+      if (sorting.value) {
+        return b.priority - a.priority
       }
+      return a.priority - b.priority
+    }
+
+    return {
+      sorting,
+      bugs: computed(() => AppState.bugs.sort(sortByPriority))
     }
   }
 

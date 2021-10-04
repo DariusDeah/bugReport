@@ -3,7 +3,7 @@
     <label for="" class="form-label"></label>
     <div class="mb-3">
       <label for="" class="form-label">Priority Level</label>
-      <select class="form-control" name="" id="" v-model="bug.priority">
+      <select class="form-control" name="" id="" v-model="editable.priority">
         <option>1</option>
         <option>2</option>
         <option>3</option>
@@ -15,19 +15,19 @@
     <input type="text"
            class="form-control"
            name="bug-title"
-           id=""
+
            aria-describedby="helpId"
            placeholder=""
-           v-model="bug.title"
+           v-model="editable.title"
     >
     <label for="bug-description" class="form-label">Description</label>
     <textarea type="text"
               class="form-control text-area"
               name="bug-description"
-              id=""
+
               aria-describedby="helpId"
               placeholder=""
-              v-model="bug.description"
+              v-model="editable.description"
     >
     </textarea>
     <button type="submit">
@@ -41,6 +41,8 @@ import { ref } from '@vue/reactivity'
 import { bugsService } from '../services/BugsService'
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
+import { logger } from '../utils/Logger'
+import { router } from "../router"
 export default {
 
   setup() {
@@ -50,7 +52,12 @@ export default {
       editable,
       bug: computed(() => AppState.bugs),
       async createBug() {
-        await bugsService.createBug(editable.value)
+        try {
+          await bugsService.createBug(editable.value)
+          router.push{name:'Bug'}
+        } catch (error) {
+          logger.log(error)
+        }
       }
     }
   }

@@ -1,9 +1,9 @@
 <template>
   <div class="modal fade"
-       id="modelId"
+       id="modalId"
        tabindex="-1"
        role="dialog"
-       aria-labelledby="modelTitleId"
+       aria-labelledby="modalTitleId"
        aria-hidden="true"
   >
     <div class="modal-dialog" role="document">
@@ -23,7 +23,7 @@
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
             Close
           </button>
-          <button type="submit" class="btn bg-purple text-light selectable">
+          <button type="" class="btn bg-purple text-light selectable">
             Report
           </button>
         </div>
