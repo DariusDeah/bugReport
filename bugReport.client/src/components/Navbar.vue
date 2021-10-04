@@ -1,7 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-light px-5 ">
     <h1 class="text-muted ps-3">
-      Dashboard
     </h1>
 
     <button
@@ -119,4 +118,5 @@ a:hover {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
+
 </style>

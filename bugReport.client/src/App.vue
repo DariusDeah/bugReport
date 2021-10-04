@@ -1,7 +1,7 @@
 <template>
   <main class="container-fluid">
-    <div class="row">
-      <Sidebar class="col-md-2 p-0" />
+    <div class="row ">
+      <Sidebar class="col-md-2 p-0 " />
       <div class="col-md-10 p-0">
         <Navbar />
         <div class="col-md-12 viewport">
@@ -28,5 +28,10 @@ export default {
 </script>
 <style lang="scss">
 @import "./assets/scss/main.scss";
-
+.stick{
+   position: -webkit-sticky;
+  position: sticky ;
+  left: 0%;
+  top: 0%;
+}
 </style>

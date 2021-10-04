@@ -14,5 +14,12 @@ class BugsService {
     const res = await api.get(`api/bugs/${bugId}`)
     AppState.activeBug = res.data
   }
+
+  async closedBug(bugId, bugData) {
+    const res = await api.put(`api/bugs/${bugId}`, bugData)
+  }
+  async softDelete(bugId) {
+    cosnt res = await 
+  }
 }
 export const bugsService = new BugsService()

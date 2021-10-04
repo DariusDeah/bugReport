@@ -103,6 +103,10 @@ export default {
 .sidebar{
   background-color: #875cff;
   height: 100vh;
+   position: -webkit-sticky;
+  position: sticky ;
+  left: 0%;
+  top: 0%;
 }
 .page :hover{
   background-color:#e5e5e5 !important;
@@ -139,4 +143,5 @@ a:hover {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
+
 </style>

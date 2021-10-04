@@ -1,14 +1,14 @@
 <template>
   <main class="bg-light">
-    <div class="container-fluid ">
-      <div class="card most-tracked-holder p-1 mb-2 ">
+    <div class="container  ">
+      <div class="card most-tracked-holder p-1 mb-4 pb-5 ">
         <div class="row text-center">
           <h2>Most Tracked</h2>
         </div>
-        <div class="card-body">
+        <div class="card-body ">
           <div class="row pt-3 justify-content-center">
             <div class="col-4">
-              <div class="card p-2 rounding">
+              <div class="card p-2 rounding  most-tracked " data-aos="fade-left">
                 <img class="card-img-top" src="holder.js/100px180/" alt="">
                 <div class="card-body">
                   <h4 class="card-title">
@@ -21,7 +21,7 @@
               </div>
             </div>
             <div class="col-4">
-              <div class="card p-2 rounding ">
+              <div class="card p-2 rounding  most-tracked  ">
                 <img class="card-img-top" src="holder.js/100px180/" alt="">
                 <div class="card-body">
                   <h4 class="card-title">
@@ -34,7 +34,7 @@
               </div>
             </div>
             <div class="col-4">
-              <div class="card p-2 rounding ">
+              <div class="card p-2 rounding  most-tracked ">
                 <img class="card-img-top" src="holder.js/100px180/" alt="">
                 <div class="card-body">
                   <h4 class="card-title">
@@ -50,14 +50,13 @@
         </div>
       </div>
     </div>
-    <section class="container-fluid ">
-    </section>
-    <section class="container-fluid">
+    <div class="row btm-border mx-4 mb-4"></div>
+    <section class="container ">
       <div class="card rounding">
         <div class="card p-2  ">
-          <div class="row ">
-            <div class="col-lg-6 ">
-              <span class="d-flex ">
+          <div class="row  ">
+            <div class="col-lg-6">
+              <span class="d-flex  ">
                 <h2>Level:</h2>
                 <button class="btn border query-btn ">1</button>
                 <button class="btn border query-btn ">2</button>
@@ -82,8 +81,20 @@
             </div>
           </div>
         </div>
-        <div class="card-body overflow-auto" style="height:55vh">
+        <div class="card-body overflow-auto" style="height:100vh">
           <Bugs v-for="b in bugs " :key="b.id" :bugs=" b" />
+        </div>
+      </div>
+    </section>
+    <div class="row btm-border mx-4 my-4"></div>
+    <section class="container p-3 ">
+      <div class="row">
+        <div class="col-6 ">
+          <h6>Bug Report</h6>
+        </div>
+        <div class="col-6 text-end pe-5  fs-2 purple">
+          <i class="mdi mdi-github selectable "></i>
+          <i class="mdi mdi-linkedin selectable"></i>
         </div>
       </div>
     </section>
@@ -138,5 +149,17 @@ export default {
         color: white;
       }
     }
+
+.btm-border{
+  border-bottom: rgba(255, 255, 255, 0.945) 2.5px solid;
+
+}
+.purple{
+color:#875cff ;
+}
+.most-tracked:hover{
+    border: #875cff solid 1px;
+    cursor: pointer;
+}
 
 </style>
