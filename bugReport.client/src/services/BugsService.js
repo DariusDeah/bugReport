@@ -2,12 +2,17 @@ import { AppState } from '../AppState'
 import { BugModel } from '../Models/BugModel'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
+import { convertToQuery } from '../utils/Query'
 
 class BugsService {
   async getBugs() {
     const res = await api.get('api/bugs')
     logger.log(res.data)
     AppState.bugs = res.data.map(b => new BugModel(b))
+  }
+
+  async priorityFilter(query) {
+    AppState.bugs = await AppState.bugs.filter(b => b.priority === query)
   }
 
   async getBugById(bugId) {
@@ -18,8 +23,10 @@ class BugsService {
   async closedBug(bugId, bugData) {
     const res = await api.put(`api/bugs/${bugId}`, bugData)
   }
+
   async softDelete(bugId) {
-    cosnt res = await 
+    const res = await api.delete(`api/bugs/${bugId}`)
+    AppState.bugs = res.data
   }
 }
 export const bugsService = new BugsService()

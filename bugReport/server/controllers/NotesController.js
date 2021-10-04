@@ -10,21 +10,9 @@ export class NotesController extends BaseController {
   constructor() {
     super('api/notes')
     this.router
-      .get('api/bugs/:bugId/notes', this.getNoteByBugId)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createNote)
-      .delete('api/notes/:notesId', this.removedNote)
-  }
-
-  // kept my get notes by bug id in the notes controller for  continuity and organization
-  async getNoteByBugId(req, res, next) {
-    try {
-      req.body.creatorId = req.userIfo.id
-      const note = await noteService.getNoteByBugId(req.params.bugId)
-      res.send(note)
-    } catch (error) {
-      next(error)
-    }
+      .delete('/:noteId', this.removedNote)
   }
 
   async createNote(req, res, next) {
@@ -40,7 +28,7 @@ export class NotesController extends BaseController {
   async removedNote(req, res, next) {
     try {
       req.body.creatorId = req.userIfo.id
-      const removednote = await noteService.removedNote()
+      const removednote = await noteService.removedNote(req.body, req.params.noteId)
       res.send(removednote)
     } catch (error) {
       next(error)

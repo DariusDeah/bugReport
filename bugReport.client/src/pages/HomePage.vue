@@ -58,11 +58,11 @@
             <div class="col-lg-6">
               <span class="d-flex  ">
                 <h2>Level:</h2>
-                <button class="btn border query-btn ">1</button>
-                <button class="btn border query-btn ">2</button>
-                <button class="btn border query-btn ">3</button>
-                <button class="btn border query-btn ">4</button>
-                <button class="btn border query-btn ">5</button>
+                <button class="btn border query-btn " @click="filterLevel(1)">1</button>
+                <button class="btn border query-btn " @click="filterLevel(2)">2</button>
+                <button class="btn border query-btn " @click="filterLevel(3)">3</button>
+                <button class="btn border query-btn " @click="filterLevel(4)">4</button>
+                <button class="btn border query-btn " @click="filterLevel(5)">5</button>
 
               </span>
             </div>
@@ -112,7 +112,10 @@ export default {
       await bugsService.getBugs()
     })
     return {
-      bugs: computed(() => AppState.bugs)
+      bugs: computed(() => AppState.bugs),
+      async filterLevel(query) {
+        await bugsService.priorityFilter(query)
+      }
     }
   }
 
