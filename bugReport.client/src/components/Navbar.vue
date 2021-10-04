@@ -16,9 +16,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
-        <li>
-          <i class="mdi mdi-arrow-left fs-3 selectable" @click="backpage()"></i>
-        </li>
       </ul>
       <span class="navbar-text">
         <button

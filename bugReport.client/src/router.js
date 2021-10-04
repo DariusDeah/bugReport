@@ -20,7 +20,12 @@ const routes = [
     path: '/account',
     name: 'Account',
     component: loadPage('AccountPage'),
-    beforeEnter: authGuard
+    beforeEnter: authGuard,
+    children: [{
+      path: 'stats',
+      name: 'Account.Stats',
+      component: loadPage('StatsPage')
+    }]
   },
   {
     path: '/bug/:bugId',

@@ -30,19 +30,25 @@
               v-model="bug.description"
     >
     </textarea>
-    <small id="helpId" class="form-text text-muted">Help text</small>
+    <button type="submit">
+      send
+    </button>
   </form>
 </template>
 
 <script>
 import { ref } from '@vue/reactivity'
 import { bugsService } from '../services/BugsService'
+import { computed } from '@vue/runtime-core'
+import { AppState } from '../AppState'
 export default {
+
   setup() {
     const editable = ref({})
 
     return {
       editable,
+      bug: computed(() => AppState.bugs),
       async createBug() {
         await bugsService.createBug(editable.value)
       }
