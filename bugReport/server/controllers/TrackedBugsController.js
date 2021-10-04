@@ -9,7 +9,7 @@ export class TrackedBugsController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createTrackedBug)
-      .delete('', this.removeBug)
+      // .delete('', this.removeBug)
   }
 
   async createTrackedBug(req, res, next) {
@@ -22,7 +22,7 @@ export class TrackedBugsController extends BaseController {
     }
   }
 
-  async removeBug(req, res, next) {
-    const blah = await trackedBugsService
-  }
+  // async removeBug(req, res, next) {
+  //   const blah = await trackedBugsService
+  // }
 }

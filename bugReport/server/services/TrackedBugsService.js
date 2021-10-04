@@ -3,7 +3,6 @@ import { BadRequest } from '../utils/Errors'
 
 class TrackedBugsService {
   async createTrackedBug(bugData) {
-    const x = 2
     const trackedBug = await dbContext.TrackedBug.create(bugData)
     await trackedBug.populate('tracker', 'name picture')
     await trackedBug.populate('bug')

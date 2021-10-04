@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="card p-3" style="height:85vh">
+    <div class="card p-3 rounded" style="height:85vh">
       <div class="row">
         <div class="col-6">
           <div class="about text-left">
@@ -10,16 +10,13 @@
         </div>
 
         <ul class="nav nav-tabs">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Settings</a>
+          <li class="nav-item selectable">
+            <a class="nav-link text-dark" aria-current="page">Settings</a>
           </li>
           <li class="nav-item selectable">
             <div class="nav-link text-dark" @click="accountStats()">
               Stats
             </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark" href="#">Link</a>
           </li>
         </ul>
       </div>
@@ -50,5 +47,8 @@ export default {
 <style scoped>
 img {
   max-width: 100px;
+}
+.nav-link:active{
+  background-color: gray;
 }
 </style>

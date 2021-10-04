@@ -3,6 +3,7 @@ import { BadRequest, Forbidden } from '../utils/Errors'
 import { bugsService } from './BugsService'
 
 class NoteService {
+  // !
   async getNoteByBugId(bugId) {
     const note = await dbContext.Notes.find({ bugId: bugId }).populate('creator')
     return note

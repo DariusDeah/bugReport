@@ -3,6 +3,7 @@ import { bugsService } from '../services/BugsService'
 import { noteService } from '../services/NoteService'
 import { trackedBugsService } from '../services/TrackedBugsService'
 import BaseController from '../utils/BaseController'
+import { logger } from '../utils/Logger'
 
 export class BugController extends BaseController {
   constructor() {
@@ -30,6 +31,7 @@ export class BugController extends BaseController {
   async getBugById(req, res, next) {
     try {
       const bug = await bugsService.getBugById(req.params.bugId)
+      logger.log(bug)
       res.send(bug)
     } catch (error) {
       next(error)
@@ -68,7 +70,6 @@ export class BugController extends BaseController {
 
   async getNoteByBugId(req, res, next) {
     try {
-      req.body.creatorId = req.userInfo.id
       const note = await noteService.getNoteByBugId(req.params.bugId)
       res.send(note)
     } catch (error) {

@@ -27,7 +27,7 @@ export class NotesController extends BaseController {
 
   async removedNote(req, res, next) {
     try {
-      req.body.creatorId = req.userIfo.id
+      req.body.creatorId = req.userInfo.id
       const removednote = await noteService.removedNote(req.body, req.params.noteId)
       res.send(removednote)
     } catch (error) {
