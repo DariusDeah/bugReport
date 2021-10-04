@@ -14,7 +14,7 @@ class NoteService {
   }
 
   async removedNote() {
-    const note = await dbContext.Notes
+    const note = await dbContext.Notes.remove()
 
     return note
   }

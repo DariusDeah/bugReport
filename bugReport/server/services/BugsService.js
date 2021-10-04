@@ -4,7 +4,7 @@ import { logger } from '../utils/Logger'
 
 class BugsService {
   async getBugs() {
-    const bugs = await dbContext.Bugs.find()
+    const bugs = await dbContext.Bugs.find().populate('creator')
     bugs.sort((a, b) => b.updatedAt - a.updatedAt)
     return bugs
   }
@@ -25,7 +25,7 @@ class BugsService {
 
   async editBug(bugData, bugId) {
     const bug = await this.getBugById(bugId)
-    // await bug.populate('creator')
+    await bug.populate('creator')
     if (bug.creatorId.toString() !== bugData.creatorId.toString()) {
       throw new Forbidden()
     }

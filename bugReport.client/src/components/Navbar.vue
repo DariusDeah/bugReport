@@ -1,14 +1,9 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
-        <img
-          alt="logo"
-          src="../assets/img/cw-logo.png"
-          height="45"
-        />
-      </div>
-    </router-link>
+  <nav class="navbar navbar-expand-lg bg-light px-5 ">
+    <h1 class="text-muted ps-3">
+      Dashboard
+    </h1>
+
     <button
       class="navbar-toggler"
       type="button"
@@ -23,14 +18,14 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
-          <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
+          <router-link :to="{ name: 'About' }" class="btn text-light  selectable text-uppercase">
             About
           </router-link>
         </li>
       </ul>
       <span class="navbar-text">
         <button
-          class="btn selectable text-success lighten-30 text-uppercase my-2 my-lg-0"
+          class="btn selectable  text-uppercase my-2 my-lg-0"
           @click="login"
           v-if="!user.isAuthenticated"
         >
@@ -48,9 +43,9 @@
               :src="user.picture"
               alt="user photo"
               height="40"
-              class="rounded"
+              class="rounded-circle"
             />
-            <span class="mx-3 text-success lighten-30">{{ user.name }}</span>
+
           </div>
           <div
             class="dropdown-menu p-0 list-group w-100"
@@ -95,6 +90,12 @@ export default {
 </script>
 
 <style scoped>
+.fa-bug
+{
+color: white;
+
+}
+
 .dropdown-menu {
   user-select: none;
   display: block;

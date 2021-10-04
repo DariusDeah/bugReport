@@ -1,21 +1,23 @@
 <template>
-  <header>
-    <Navbar />
-  </header>
-  <main>
-    <router-view />
-  </main>
-  <footer>
-    <div class="bg-dark text-light text-center p-4">
-      Made with 💖 by CodeWorks
+  <main class="container-fluid">
+    <div class="row">
+      <Sidebar class="col-md-2 p-0" />
+      <div class="col-md-10 p-0">
+        <Navbar />
+        <div class="col-md-12 viewport">
+          <router-view />
+        </div>
+      </div>
     </div>
-  </footer>
+  </main>
 </template>
 
 <script>
 import { computed } from 'vue'
 import { AppState } from './AppState'
+import Navbar from './components/Navbar.vue'
 export default {
+  components: { Navbar },
   name: 'App',
   setup() {
     return {

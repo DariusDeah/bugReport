@@ -20,7 +20,7 @@ export class NotesController extends BaseController {
   async getNoteByBugId(req, res, next) {
     try {
       req.body.creatorId = req.userIfo.id
-      const note = noteService.getNoteByBugId(req.params.bugId)
+      const note = await noteService.getNoteByBugId(req.params.bugId)
       res.send(note)
     } catch (error) {
       next(error)
@@ -30,7 +30,7 @@ export class NotesController extends BaseController {
   async createNote(req, res, next) {
     try {
       req.body.creatorId = req.userInfo.id
-      const note = noteService.createNote(req.body)
+      const note = await noteService.createNote(req.body)
       res.send(note)
     } catch (error) {
       next(error)
@@ -40,8 +40,8 @@ export class NotesController extends BaseController {
   async removedNote(req, res, next) {
     try {
       req.body.creatorId = req.userIfo.id
-      const note = noteService.removedNote()
-      res.send(note)
+      const removednote = await noteService.removedNote()
+      res.send(removednote)
     } catch (error) {
       next(error)
     }
