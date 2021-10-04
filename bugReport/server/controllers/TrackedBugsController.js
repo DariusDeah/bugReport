@@ -7,32 +7,22 @@ export class TrackedBugsController extends BaseController {
   constructor() {
     super('api/trackedbugs')
     this.router
-      .get('', this.getUserTrackingBugs)
       .use(Auth0Provider.getAuthorizedUserInfo)
-      .get('', this.bugsAccountTracking)
-      .post('api/trackedbugs', this.createBug)
+      .post('', this.createTrackedBug)
       .delete('', this.removeBug)
   }
 
-  async removeBug(req, res, next) {
-    const blah = await trackedBugsService
-  }
-
-  async createBug(req, res, next) {
+  async createTrackedBug(req, res, next) {
     try {
-      req.creatorId = req.userInfo.id
-      const trackedBug = await trackedBugsService.createBug(req.body)
+      req.body.accountId = req.userInfo.id
+      const trackedBug = await trackedBugsService.createTrackedBug(req.body)
       res.send(trackedBug)
     } catch (error) {
-
+      next(error)
     }
   }
 
-  async bugsAccountTracking(req, res, next) {
-    const blah = await trackedBugsService
-  }
-
-  async getUserTrackingBugs(req, res, next) {
+  async removeBug(req, res, next) {
     const blah = await trackedBugsService
   }
 }

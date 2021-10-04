@@ -17,9 +17,7 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
-          <router-link :to="{ name: 'About' }" class="btn text-light  selectable text-uppercase">
-            About
-          </router-link>
+          <i class="mdi mdi-arrow-left fs-3 selectable" @click="backpage()"></i>
         </li>
       </ul>
       <span class="navbar-text">
@@ -73,6 +71,7 @@
 import { AuthService } from '../services/AuthService'
 import { AppState } from '../AppState'
 import { computed } from 'vue'
+import { router } from '../router'
 export default {
   setup() {
     return {
@@ -82,6 +81,10 @@ export default {
       },
       async logout() {
         AuthService.logout({ returnTo: window.location.origin })
+      },
+      async backPage() {
+        // TODO set up push to go back
+        router.push('/')
       }
     }
   }
