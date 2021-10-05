@@ -3,6 +3,7 @@ import { BugModel } from '../Models/BugModel'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 import { convertToQuery } from '../utils/Query'
+import { TrackedBugModel } from '../Models/TrackedBugModel'
 
 class BugsService {
   async getBugs() {
@@ -22,11 +23,14 @@ class BugsService {
 
   async closedBug(bugId, bugData) {
     const res = await api.put(`api/bugs/${bugId}`, bugData)
+    res.data.closed = !res.data.closed
+    logger.log('closed object', res.data)
+    AppState.bugs = res.data
   }
 
   async softDelete(bugId) {
     const res = await api.delete(`api/bugs/${bugId}`)
-    AppState.bugs = res.data
+    AppState.bugs = AppState.bugs.filter(b => b.id !== bugId)
   }
 
   async createBug(bugData) {
@@ -34,6 +38,12 @@ class BugsService {
     logger.log('harrison is sad', res)
     AppState.bugs.push(new BugModel(res.data))
     return res.data
+  }
+
+  async getTrackedBugs(bugId) {
+    const res = await api.get(`api/bug/${bugId}/trackedbugs`)
+    logger.log('tracked bugs', res.data)
+    AppState.trackedBugs = res.data.map(tb => new TrackedBugModel(tb))
   }
 }
 export const bugsService = new BugsService()

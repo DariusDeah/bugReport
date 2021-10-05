@@ -1,6 +1,6 @@
 <template>
   <main class="bg-light">
-    <div class="container  ">
+    <!-- <div class="container  ">
       <div class="card most-tracked-holder p-1 mb-4 pb-5 ">
         <div class="row text-center">
           <h2>Most Tracked</h2>
@@ -49,18 +49,18 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="row btm-border mx-4 mb-4"></div>
     <section class="container ">
       <div class="card rounding">
-        <div class="card p-2  ">
+        <div class="card p-3 ">
           <div class="row  ">
             <div class="col-lg-6">
               <span class="d-flex  ">
                 <h2>Level:</h2>
-                <button class="mdi mdi-pizza " @click="sorting=!sorting">1</button>
+                <button class="mdi mdi-arrow-up" :class="{'mdi mdi-arrow-down':sorting===false}" @click="sorting=!sorting"></button>
                 <button class="btn bg-purple ms-5 text-light " data-bs-toggle="modal" data-bs-target="#bug-modal">+Bug</button>
-
+                <button class="ms-2" @click="filterByClosed()">open|closed</button>
               </span>
 
               <Modal id="bug-modal">
@@ -71,19 +71,6 @@
                   <BugForm />
                 </template>
               </Modal>
-            </div>
-            <div class="col-lg-6">
-              <div class="input-group">
-                <input type="search"
-                       class="form-control rounded"
-                       placeholder="Search"
-                       aria-label="Search"
-                       aria-describedby="search-addon"
-                />
-                <button type="button" class="btn border-purple">
-                  search
-                </button>
-              </div>
             </div>
           </div>
         </div>
@@ -98,10 +85,6 @@
         <div class="col-6 ">
           <h6>Bug Report</h6>
         </div>
-        <div class="col-6 text-end pe-5  fs-2 purple">
-          <i class="mdi mdi-github selectable "></i>
-          <i class="mdi mdi-linkedin selectable"></i>
-        </div>
       </div>
     </section>
   </main>
@@ -115,6 +98,7 @@ export default {
   name: 'Home',
   setup() {
     const sorting = ref(false)
+    let opened = ref(false)
     onMounted(async() => {
       await bugsService.getBugs()
     })
@@ -126,9 +110,14 @@ export default {
       return a.priority - b.priority
     }
 
+    function filterByClosed() {
+      opened = !opened
+      return opened
+    }
+
     return {
       sorting,
-      bugs: computed(() => AppState.bugs.sort(sortByPriority))
+      bugs: computed(() => AppState.bugs.sort(sortByPriority).filter(b => b.closed !== filterByClosed()))
     }
   }
 

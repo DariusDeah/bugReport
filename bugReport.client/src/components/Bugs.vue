@@ -22,6 +22,10 @@
             <button class="btn border border-secondary  " @click="softDelete()">
               delete
             </button>
+            <p class="ps-2">
+              {{ bugs.createdAt }}
+              <!-- tried to local string it gives me errors -->
+            </p>
           </div>
         </div>
       </div>
@@ -35,20 +39,11 @@
         <div class="row">
           <h4>Discovered by:</h4>
         </div>
-        <div class="row ">
+        <div class="row pb-5">
           <img :src="bugs.creator.picture" alt="" style="width:5rem" class="rounded-circle">
           {{ bugs.creator.name }}
         </div>
         <div class="row mt-3">
-          <h4>Trackers:</h4>
-        </div>
-        <div class="row ">
-          <!-- show each trackers profile -->
-          <img :src="bugs.creator.picture" alt="" style="width:4rem" class="rounded-circle mb-2">
-          <img :src="bugs.creator.picture" alt="" style="width:4rem" class="rounded-circle mb-2">
-          <img :src="bugs.creator.picture" alt="" style="width:4rem" class="rounded-circle mb-2">
-          <img :src="bugs.creator.picture" alt="" style="width:4rem" class="rounded-circle mb-2">
-          <img :src="bugs.creator.picture" alt="" style="width:4rem" class="rounded-circle mb-2">
         </div>
       </div>
     </div>
@@ -60,6 +55,7 @@ import { computed, onMounted } from '@vue/runtime-core'
 import { bugsService } from '../services/BugsService'
 import { AppState } from '../AppState'
 import { BugModel } from '../Models/BugModel'
+import Pop from '../utils/Pop'
 export default {
   props: {
     bugs: {
@@ -73,14 +69,14 @@ export default {
         try {
           await bugsService.closedBug(props.bugs.id)
         } catch (error) {
-
+          Pop(error, 'error')
         }
       },
       async softDelete() {
         try {
           await bugsService.softDelete(props.bugs.id)
         } catch (error) {
-
+          Pop(error, 'error')
         }
       }
 

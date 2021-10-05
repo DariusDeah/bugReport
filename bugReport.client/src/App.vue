@@ -1,8 +1,8 @@
 <template>
   <main class="container-fluid">
     <div class="row ">
-      <Sidebar class="col-md-2 p-0 " />
-      <div class="col-md-10 p-0">
+      <Sidebar class="col-md-1 p-0 " />
+      <div class="col-md-11 p-0">
         <Navbar />
         <div class="col-md-12 viewport">
           <router-view />

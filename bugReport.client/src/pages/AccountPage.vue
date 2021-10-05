@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <div class="card p-3 rounded" style="height:85vh">
+  <div class="container graid ">
+    <div class="card p-3  glass rounding" style="height:85vh">
       <div class="row">
         <div class="col-6">
           <div class="about text-left">
@@ -50,5 +50,15 @@ img {
 }
 .nav-link:active{
   background-color: gray;
+}
+.glass{
+  background-color: rgba(248, 248, 248, 0.466) !important;
+  backdrop-filter: blur(.9rem);
+  z-index: 4;
+  height: 10rem;
+  border: solid white 2px;
+}
+.rounding{
+  border-radius: 2.5rem;
 }
 </style>

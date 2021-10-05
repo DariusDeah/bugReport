@@ -6,8 +6,19 @@ import { NoteModel } from '../Models/NoteModel'
 class NotesService {
   async getNotesByBugId(bugId) {
     const res = await api.get(`api/bugs/${bugId}/notes`)
-    logger.log(res.data)
+    logger.log('this bugs notes', res.data)
     AppState.notes = res.data.map(n => new NoteModel(n))
+  }
+
+  async createNote(noteData) {
+    const res = await api.post('api/notes', noteData)
+    logger.log(res)
+    AppState.notes.push(res.data)
+  }
+
+  async removedNote(noteId) {
+    const res = api.delete(`api/notes/${noteId}`)
+    logger.log(res.data)
   }
 }
 export const notesService = new NotesService()

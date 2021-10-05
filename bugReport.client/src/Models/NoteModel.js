@@ -4,5 +4,6 @@ export class NoteModel {
     this.body = notedata.body
     this.creator = notedata.creator
     this.createdAt = notedata.createdAt
+    this.bugId = notedata.bugId
   }
 }

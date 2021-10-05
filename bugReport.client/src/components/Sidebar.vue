@@ -9,28 +9,6 @@
         </router-link>
       </div>
       <div class="links">
-        <ul class="nav-links page  ps-0 ">
-          <li class=" page text nav-link text-light pb-3 fw-bold ">
-            link to dashboard
-          </li>
-          <li class="nav-link text-light pb-3 fw-bold">
-            my tracked bugs
-          </li>
-          <li class="nav-link  text-light pb-3 fw-bold">
-            link to completed
-          </li>
-          <li class="nav-link  text-light pb-3 fw-bold">
-            link to stats
-          </li>
-          <li class="nav-link  text-light pb-3 fw-bold">
-            <router-link :to="{ name: 'About' }" class="btn text-light   text-uppercase">
-              About
-            </router-link>
-          </li>
-          <li class="nav-link  text-light pb-3 fw-bold">
-            link to something
-          </li>
-        </ul>
       </div>
     </div>
     <div class="bottom-part">
@@ -56,7 +34,6 @@
             height="40"
             class="rounded-circle"
           />
-          <span class="mx-3 text-light lighten-30">{{ user.name }}</span>
         </div>
         <div
           class="dropdown-menu p-0 list-group w-100"
@@ -101,7 +78,7 @@ export default {
 
 <style>
 .sidebar{
-  background-color: #875cff;
+  background-color: #605cff;
   height: 100vh;
    position: -webkit-sticky;
   position: sticky ;
@@ -112,7 +89,7 @@ export default {
   background-color:#e5e5e5 !important;
   color:#875cff !important;
   cursor: pointer !important;
-width: 20rem;
+width: 5rem;
 border-radius: 12rem;
 
 }
