@@ -1,7 +1,7 @@
 export class BugModel {
   constructor(bugData) {
-    // this.id = bugData.id || bugData._id
-    // this.creatorId = bugData.creatorId
+    this.id = bugData.id
+    this.creatorId = bugData.creatorId
     this.title = bugData.title
     this.description = bugData.description
     this.priority = bugData.priority

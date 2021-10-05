@@ -68,10 +68,10 @@ export default {
   height: 10rem;
 }
 .pie{
-  height: 20rem;
+  height: 15rem;
   z-index: 0;
   position: absolute;
-  right: -25rem;
+  right: -20rem;
   bottom: 2px;
 }
 

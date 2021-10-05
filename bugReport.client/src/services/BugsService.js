@@ -33,6 +33,7 @@ class BugsService {
     const res = await api.post('api/bugs', bugData)
     logger.log('harrison is sad', res)
     AppState.bugs.push(new BugModel(res.data))
+    return res.data
   }
 }
 export const bugsService = new BugsService()

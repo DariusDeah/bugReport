@@ -42,7 +42,9 @@ import { bugsService } from '../services/BugsService'
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
-import { router } from "../router"
+import { router } from '../router'
+import Pop from '../utils/Pop'
+import { Modal } from 'bootstrap'
 export default {
 
   setup() {
@@ -53,8 +55,11 @@ export default {
       bug: computed(() => AppState.bugs),
       async createBug() {
         try {
-          await bugsService.createBug(editable.value)
-          router.push{name:'Bug'}
+          const bug = await bugsService.createBug(editable.value)
+          router.push({ name: 'Bug', params: { bugId: bug.id } })
+          Pop.toast('Project Added', 'success')
+          const modal = Modal.getInstance(document.getElementById('bug-modal'))
+          modal.hide()
         } catch (error) {
           logger.log(error)
         }
