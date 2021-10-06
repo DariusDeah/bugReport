@@ -23,7 +23,7 @@
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
             Close
           </button>
-          <button type="" class="btn bg-purple text-light selectable">
+          <button type="submit" class="btn bg-purple text-light selectable">
             Report
           </button>
         </div>

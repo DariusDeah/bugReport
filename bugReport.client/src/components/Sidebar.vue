@@ -4,7 +4,9 @@
       <div class=" py-3">
         <router-link class="navbar-brand d-flex justify-content-center" :to="{ name: 'Home' }">
           <div class="d-flex flex-column align-items-center">
-            <i class="fas fa-bug text-light fs-1"></i>
+            <i class="fas fa-bug text-light fs-1"></i> <h4 class="text-light">
+              Home
+            </h4>
           </div>
         </router-link>
       </div>

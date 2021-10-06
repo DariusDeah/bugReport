@@ -1,13 +1,14 @@
 <template>
-  <div class="card round-border">
+  <div class="card round-border mb-2">
     <div class="card-body">
       <h5 class="card-title">
       </h5>
       <i class="mdi mdi-delete text-danger selectable fs-3" @click="removeNote()"></i>
       <h4 class="card-text " style="font-size:15px">
-        <!-- {{ notes.body }} -->
+        <img :src="note.creator.picture" alt="" style="height:2rem" class="rounded-circle">
+        {{ note.body }}
       </h4>
-      <!-- <p>{{ notes.createdAt }}</p> -->
+      <p>{{ note.createdAt }}</p>
     </div>
   </div>
 </template>

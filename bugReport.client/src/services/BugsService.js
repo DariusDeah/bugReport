@@ -2,7 +2,8 @@ import { AppState } from '../AppState'
 import { BugModel } from '../Models/BugModel'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
-import { convertToQuery } from '../utils/Query'
+// import { TrackedBugModel } from '../Models/TrackedBugModel'
+import { TrackersModel } from '../Models/TrackersModel'
 import { TrackedBugModel } from '../Models/TrackedBugModel'
 
 class BugsService {
@@ -40,10 +41,23 @@ class BugsService {
     return res.data
   }
 
+  async editBug(bugId, bugData) {
+    const res = await api.put(`api/bugs/${bugId}`, bugData)
+    logger.log(res.data)
+    AppState.activeBug = res.data
+  }
+
   async getTrackedBugs(bugId) {
-    const res = await api.get(`api/bug/${bugId}/trackedbugs`)
+    const res = await api.get(`api/bugs/${bugId}/trackedbugs`)
     logger.log('tracked bugs', res.data)
-    AppState.trackedBugs = res.data.map(tb => new TrackedBugModel(tb))
+    AppState.trackedBugs = res.data.map(tb => new TrackersModel(tb.tracker))
+  }
+
+  async getUserBugs() {
+    const res = await api.get('account/trackedbugs')
+    logger.log('tracked bugs', res.data)
+    AppState.userBugs = res.data.map(tb => new BugModel(tb.bugs))
+    logger.log(AppState.userBugs)
   }
 }
 export const bugsService = new BugsService()

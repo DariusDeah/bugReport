@@ -1,4 +1,5 @@
 import { AppState } from '../AppState'
+import { TrackedBugModel } from '../Models/TrackedBugModel'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 
@@ -10,6 +11,12 @@ class AccountService {
     } catch (err) {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
     }
+  }
+
+  async trackBug() {
+    const res = await api.post('api/trackedbugs')
+    logger.log(res.data)
+    AppState.trackedBugs = res.data
   }
 }
 

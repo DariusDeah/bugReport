@@ -57,10 +57,12 @@
           <div class="row  ">
             <div class="col-lg-6">
               <span class="d-flex  ">
-                <h2>Level:</h2>
-                <button class="mdi mdi-arrow-up" :class="{'mdi mdi-arrow-down':sorting===false}" @click="sorting=!sorting"></button>
-                <button class="btn bg-purple ms-5 text-light " data-bs-toggle="modal" data-bs-target="#bug-modal">+Bug</button>
-                <button class="ms-2" @click="filterByClosed()">open|closed</button>
+                <h2>priority filter:</h2>
+                <div :v-if="bugs">
+                  <button class="mdi mdi-arrow-up" :class="{'mdi mdi-arrow-down':sorting===false}" @click="sorting=!sorting"></button>
+                </div>
+                <button class="btn bg-purple ms-5 text-white fw-bold " data-bs-toggle="modal" data-bs-target="#bug-modal">+Bug</button>
+                <button class="ms-2" @click="opened = !opened">open|closed</button>
               </span>
 
               <Modal id="bug-modal">
@@ -75,7 +77,7 @@
           </div>
         </div>
         <div class="card-body overflow-auto" style="height:120vh">
-          <Bugs v-for="b in bugs " :key="b.id" :bugs=" b" />
+          <Bugs v-for="b in bugs " :key="b.id" :bugs="b" />
         </div>
       </div>
     </section>
@@ -94,11 +96,12 @@
 import { computed, onMounted, ref } from '@vue/runtime-core'
 import { bugsService } from '../services/BugsService'
 import { AppState } from '../AppState'
+import { logger } from '../utils/Logger'
 export default {
   name: 'Home',
   setup() {
     const sorting = ref(false)
-    let opened = ref(false)
+    const opened = ref(true)
     onMounted(async() => {
       await bugsService.getBugs()
     })
@@ -110,14 +113,18 @@ export default {
       return a.priority - b.priority
     }
 
-    function filterByClosed() {
-      opened = !opened
-      return opened
+    function filterByClosed(b) {
+      if (opened.value) {
+        b.closed = true
+      }
+      return false
     }
 
     return {
       sorting,
-      bugs: computed(() => AppState.bugs.sort(sortByPriority).filter(b => b.closed !== filterByClosed()))
+      opened,
+      bugs: computed(() => AppState.bugs.sort(sortByPriority))
+      // .filter(filterByClosed))
     }
   }
 
@@ -132,42 +139,42 @@ export default {
   border-radius: 1rem;
 }
 
-.query-btn {
-    &:visited {
-      background-color:#875cff!important ;
-      color: white;
-    }
-    &:hover {
-      background-color:#875cff !important;
-      color: white;
-    }
-    &:active {
-      background-color:#875cff !important;
-      color: white;
-    }
+// .query-btn {
+//     &:visited {
+//       background-color:#875cff!important ;
+//       color: white;
+//     }
+//     &:hover {
+//       background-color:#875cff !important;
+//       color: white;
+//     }
+//     &:active {
+//       background-color:#875cff !important;
+//       color: white;
+//     }
 
-}
-.border-purple{
-      border: #875cff solid 1px;
-      &:hover{
-        background-color: #875cff;
-        color: white;
-      }
-    }
+// }
+// .border-purple{
+//       border: #875cff solid 1px;
+//       &:hover{
+//         background-color: #875cff;
+//         color: white;
+//       }
+//     }
 
 .btm-border{
   border-bottom: rgba(255, 255, 255, 0.945) 2.5px solid;
 
 }
 .purple{
-color:#875cff ;
+color:#605cff ;
 }
-.most-tracked:hover{
-    border: #875cff solid 1px;
-    cursor: pointer;
-}
+// .most-tracked:hover{
+//     border: #875cff solid 1px;
+//     cursor: pointer;
+// }
 .bg-purple{
-    background-color: #875cff;
+    background-color: #605cff !important;
 }
 
 </style>

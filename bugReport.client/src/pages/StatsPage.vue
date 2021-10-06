@@ -48,12 +48,22 @@
           </div> -->
     </div>
   </div>
-
-  <!-- <img src="src\assets\img\undraw_Pie_chart_re_bgs8.svg" alt="" class="pie"> -->
+  <div v-if="userBugs.length === 1">
+    <Bugs v-for="b in userBugs " :key="b.id" :bugs="b" />
+  </div>
 </template>
 
 <script>
+import { computed, onMounted } from '@vue/runtime-core'
+import { bugsService } from '../services/BugsService'
+import { AppState } from '../AppState'
 export default {
+  setup() {
+    onMounted(async() => await bugsService.getUserBugs())
+    return {
+      userBugs: computed(() => AppState.userBugs)
+    }
+  }
 
 }
 </script>

@@ -5,13 +5,17 @@
         <div class="row">
           <div class="col-11 ">
             <div class="row pt-3 p-4">
-              <div class="col-3">
+              <div class="col-3 ">
+                <h6>Discovered by</h6>
+                <div v-if="bug.creator">
+                  <img :src="bug.creator.picture" alt="" class="rounded-circle mb-2" style="height:3rem">
+                </div>
                 <h6>Priortiy Level</h6>
                 <div class="rounding-ex   text-light fs-1 text-center" :class="{'bg-danger':bug.priority===5,'bg-warning':bug.priority < 5 && bug.priority >1, 'green':bug.priority === 1}" style="width:4rem">
                   {{ bug.priority }}
                 </div>
               </div>
-              <div class="col-9 text-center">
+              <div class="col-6 text-center">
                 <h1>{{ bug.title }}</h1>
               </div>
               <ul class="message-li">
@@ -20,6 +24,7 @@
               </ul>
             </div>
             <!--  -->
+            <i class="mdi mdi-star-circle selectable fs-4" @click="trackBug()"></i>
             <div class="row justify-content-center close-buttons" v-if="account.id === bug.creatorId">
               <div class="col-lg-2 d-flex">
                 <button class="btn border border-success " @click="closeBug()" :class="{'btn-success disabled':bug.closed===false}">
@@ -31,9 +36,20 @@
                 <button class="btn border border-secondary  " @click="softDelete()">
                   delete
                 </button>
+                <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#bug-modal-edit">
+                  edit
+                </button>
               </div>
             </div>
             <!--  -->
+            <Modal id="bug-modal-edit">
+              <template #modal-title>
+                <h4>Edit Bug</h4>
+              </template>
+              <template #modal-body>
+                <EditBugForm />
+              </template>
+            </Modal>
             <div class="row text-center  ">
               <h6>{{ bug.description }}</h6>
             </div>
@@ -42,8 +58,7 @@
             <div class="row text-light">
               <h5>Trackers</h5>
             </div>
-            <!-- <img :src="trackedbug.accountId.picture" alt="" class="rounded-circle mb-2" style="width: 3rem">
-            <img :src="trackedbug.accountId.picture" alt="" class="rounded-circle mb-2" style="width: 3rem"> -->
+            <Trackers v-for="t in tracked" :key="t.id" :tracked-bug="t" />
           </div>
         </div>
       </div>
@@ -68,7 +83,7 @@
     </section>
     <section class="container ">
       <div class="row px-2 mt-2">
-        <Notes v-for="n in notes " :key="n.id" :notes="n " />
+        <Notes v-for="n in notes " :key="n.id" :note="n " />
       </div>
     </section>
   </main>
@@ -83,6 +98,7 @@ import { notesService } from '../services/NotesService'
 import Pop from '../utils/Pop'
 import { BugModel } from '../Models/BugModel'
 import { router } from '../router'
+import { accountService } from '../services/AccountService'
 export default {
   props: {
     trackedBug: {
@@ -130,6 +146,14 @@ export default {
             Pop.toast('bug deleted', 'success')
             router.push('/')
           }
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      },
+      async trackBug() {
+        try {
+          await accountService.trackBug()
+          Pop.toast('bug tracked', 'success')
         } catch (error) {
           Pop.toast(error, 'error')
         }
